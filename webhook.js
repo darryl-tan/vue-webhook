@@ -68,9 +68,14 @@ server.on('error', (err) => {
     console.error('Server error:', err);
 });
 
-server.listen(4000, () => {
-    if (!isServerStarted) { // 检查服务是否已经启动
-        console.log('服务正在4000端口上启动!');
-        isServerStarted = true; // 标记服务已经启动
+const PORT = 4000;
+
+server.listen(PORT, () => {
+    console.log(`服务正在 ${PORT} 端口上启动!`);
+}).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.error(`端口 ${PORT} 已被占用！`);
+    } else {
+        console.error('启动服务时发生错误：', err);
     }
 });
