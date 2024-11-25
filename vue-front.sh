@@ -9,9 +9,9 @@ git pull origin main
 echo "打包最新代码"
 npm run build
 echo "开始构建镜像"
-docker build -t vue-front .
+docker build -t vue-front:1.0 .
 echo "删除旧容器"
 docker stop vue-front-container
 docker rm vue-front-container
 echo "启动新容器"
-docker container run -p 80:80 -d --name vue-front-container vue-front
+docker container run -p 80:80 -d --name vue-front-container vue-front:1.0
